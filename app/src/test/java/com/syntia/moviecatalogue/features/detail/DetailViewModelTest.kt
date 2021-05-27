@@ -6,8 +6,8 @@ import com.syntia.moviecatalogue.core.domain.model.detail.CastUiModel
 import com.syntia.moviecatalogue.core.domain.model.detail.DetailUiModel
 import com.syntia.moviecatalogue.core.domain.usecase.DetailUseCase
 import com.syntia.moviecatalogue.core.domain.usecase.FavoriteItemUseCase
-import com.syntia.moviecatalogue.core.helper.BaseViewModelTest
 import com.syntia.moviecatalogue.features.detail.viewmodel.DetailViewModel
+import com.syntia.moviecatalogue.helper.BaseViewModelTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.delay

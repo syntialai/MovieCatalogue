@@ -3,8 +3,8 @@ package com.syntia.moviecatalogue.features.main
 import com.syntia.moviecatalogue.base.domain.model.result.ResultWrapper
 import com.syntia.moviecatalogue.core.domain.model.trending.TrendingItemUiModel
 import com.syntia.moviecatalogue.core.domain.usecase.TrendingUseCase
-import com.syntia.moviecatalogue.core.helper.BaseViewModelTest
 import com.syntia.moviecatalogue.features.main.viewmodel.MainViewModel
+import com.syntia.moviecatalogue.helper.BaseViewModelTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.delay

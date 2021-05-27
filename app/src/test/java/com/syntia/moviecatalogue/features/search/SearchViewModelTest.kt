@@ -2,9 +2,9 @@ package com.syntia.moviecatalogue.features.search
 
 import com.syntia.moviecatalogue.core.domain.model.search.SearchResultUiModel
 import com.syntia.moviecatalogue.core.domain.usecase.SearchUseCase
-import com.syntia.moviecatalogue.core.helper.BaseViewModelTest
 import com.syntia.moviecatalogue.features.search.adapter.SearchResultAdapter
 import com.syntia.moviecatalogue.features.search.viewmodel.SearchViewModel
+import com.syntia.moviecatalogue.helper.BaseViewModelTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest

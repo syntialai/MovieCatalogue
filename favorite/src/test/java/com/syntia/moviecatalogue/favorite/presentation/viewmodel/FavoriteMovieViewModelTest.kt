@@ -2,7 +2,7 @@ package com.syntia.moviecatalogue.favorite.presentation.viewmodel
 
 import com.syntia.moviecatalogue.core.domain.model.movie.MovieUiModel
 import com.syntia.moviecatalogue.core.domain.usecase.FavoriteItemUseCase
-import com.syntia.moviecatalogue.core.helper.BaseViewModelTest
+import com.syntia.moviecatalogue.favorite.helper.BaseViewModelTest
 import com.syntia.moviecatalogue.favorite.presentation.adapter.FavoriteMovieAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi

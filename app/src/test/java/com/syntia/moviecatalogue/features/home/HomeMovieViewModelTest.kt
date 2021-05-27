@@ -2,9 +2,9 @@ package com.syntia.moviecatalogue.features.home
 
 import com.syntia.moviecatalogue.core.domain.model.movie.MovieUiModel
 import com.syntia.moviecatalogue.core.domain.usecase.TrendingUseCase
-import com.syntia.moviecatalogue.core.helper.BaseViewModelTest
 import com.syntia.moviecatalogue.features.home.adapter.HomeMovieAdapter
 import com.syntia.moviecatalogue.features.home.viewmodel.HomeMovieViewModel
+import com.syntia.moviecatalogue.helper.BaseViewModelTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
