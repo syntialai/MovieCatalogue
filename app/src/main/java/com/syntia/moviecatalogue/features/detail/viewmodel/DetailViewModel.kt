@@ -37,6 +37,11 @@ class DetailViewModel(private val detailUseCase: DetailUseCase,
 
   private var _typeAndId: Pair<String, Int>? = null
 
+  override fun onCleared() {
+    super.onCleared()
+    _typeAndId = null
+  }
+
   fun setIdAndType(id: Int, type: String) {
     _typeAndId = Pair(type, id)
   }

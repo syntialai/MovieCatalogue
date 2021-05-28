@@ -4,11 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class SearchResult(
 
+    @SerializedName("adult")
     val adult: Boolean? = false,
 
     @SerializedName("first_air_date")
     val firstAirDate: String?,
 
+    @SerializedName("id")
     val id: Int,
 
     @SerializedName("known_for")
@@ -17,6 +19,7 @@ data class SearchResult(
     @SerializedName("media_type")
     val mediaType: String,
 
+    @SerializedName("name")
     val name: String?,
 
     @SerializedName("poster_path")
@@ -26,9 +29,9 @@ data class SearchResult(
     val profilePath: String?,
 
     @SerializedName("release_date")
-
     val releaseDate: String?,
 
+    @SerializedName("title")
     val title: String?,
 
     @SerializedName("vote_average")

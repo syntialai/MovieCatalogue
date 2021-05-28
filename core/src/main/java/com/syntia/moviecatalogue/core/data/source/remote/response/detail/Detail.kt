@@ -4,13 +4,16 @@ import com.google.gson.annotations.SerializedName
 
 data class Detail(
 
+    @SerializedName("id")
     val id: Int,
 
     @SerializedName("poster_path")
     val posterPath: String? = null,
 
+    @SerializedName("name")
     val name: String? = null,
 
+    @SerializedName("title")
     val title: String? = null,
 
     @SerializedName("release_date")
@@ -22,6 +25,7 @@ data class Detail(
     @SerializedName("original_language")
     val originalLanguage: String,
 
+    @SerializedName("runtime")
     val runtime: Int? = null,
 
     @SerializedName("number_of_episodes")
@@ -30,9 +34,12 @@ data class Detail(
     @SerializedName("vote_average")
     val voteAverage: Double,
 
+    @SerializedName("adult")
     val adult: Boolean? = false,
 
+    @SerializedName("genres")
     val genres: List<Genre>,
 
+    @SerializedName("overview")
     val overview: String?
 )

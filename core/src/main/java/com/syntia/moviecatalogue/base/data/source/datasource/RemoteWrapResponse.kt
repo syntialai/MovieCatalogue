@@ -5,27 +5,33 @@ import com.syntia.moviecatalogue.base.data.remote.response.ResponseWrapper
 import com.syntia.moviecatalogue.base.data.remote.response.error.ErrorResponse
 import java.io.IOException
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
 
-abstract class BaseRemoteDataSource {
+abstract class RemoteWrapResponse<Response> {
 
-  abstract val ioDispatcher: CoroutineDispatcher
+  protected abstract suspend fun fetchData(): Response
 
-  fun <T> createFlow(dataFetch: suspend () -> T): Flow<ResponseWrapper<T>> {
-    return flow {
-      try {
-        emit(ResponseWrapper.Success(dataFetch.invoke()))
-      } catch (throwable: Throwable) {
-        emit(when (throwable) {
-          is IOException -> ResponseWrapper.NetworkError
-          is HttpException -> getErrorResponseWrapper(throwable)
-          else -> ResponseWrapper.Error()
-        })
-      }
-    }.flowOn(ioDispatcher)
+  fun getResult(dispatcher: CoroutineDispatcher) = result.flowOn(dispatcher)
+
+  private val result = flow {
+    try {
+      emit(ResponseWrapper.Success(fetchData()))
+    } catch (throwable: Throwable) {
+      emit(when (throwable) {
+        is IOException -> ResponseWrapper.NetworkError
+        is HttpException -> getErrorResponseWrapper(throwable)
+        else -> ResponseWrapper.Error()
+      })
+    }
+  }.catch { throwable ->
+    when (throwable) {
+      is IOException -> ResponseWrapper.NetworkError
+      is HttpException -> getErrorResponseWrapper(throwable)
+      else -> ResponseWrapper.Error()
+    }
   }
 
   private fun getErrorResponseWrapper(exception: HttpException): ResponseWrapper.Error {

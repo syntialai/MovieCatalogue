@@ -15,7 +15,7 @@ import retrofit2.Retrofit
 
 val remoteDataSourceModule = module {
   single { DetailRemoteDataSourceImpl(get(), get()) } bind DetailRemoteDataSource::class
-  single { SearchRemoteDataSourceImpl(get(), get()) } bind SearchRemoteDataSource::class
+  single { SearchRemoteDataSourceImpl(get()) } bind SearchRemoteDataSource::class
   single { TrendingRemoteDataSourceImpl(get(), get()) } bind TrendingRemoteDataSource::class
 }
 

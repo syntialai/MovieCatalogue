@@ -12,14 +12,17 @@ import java.util.Locale
 
 object TrendingMapper {
 
-  fun toTrendingItemUiModels(responses: ListItemResponse<TrendingItem>) = DataMapper.toUiModels(
-      responses, ::toTrendingItemUiModel)
+  fun toTrendingItemUiModels(responses: ListItemResponse<TrendingItem>) = responses.results.map {
+    toTrendingItemUiModel(it)
+  }
 
-  fun toMovieUiModels(responses: ListItemResponse<Movie>) = DataMapper.toUiModels(responses,
-      ::toMovieUiModel)
+  fun toMovieUiModels(responses: ListItemResponse<Movie>) = responses.results.map {
+    toMovieUiModel(it)
+  }
 
-  fun toTvShowsUiModels(responses: ListItemResponse<TvShows>) = DataMapper.toUiModels(responses,
-      ::toTvShowsUiModel)
+  fun toTvShowsUiModels(responses: ListItemResponse<TvShows>) = responses.results.map {
+    toTvShowsUiModel(it)
+  }
 
   private fun toTrendingItemUiModel(response: TrendingItem) = TrendingItemUiModel(
       id = response.id,

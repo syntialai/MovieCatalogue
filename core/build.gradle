@@ -28,14 +28,12 @@ android {
 
   buildTypes {
     release {
-      minifyEnabled false
+      minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-      consumerProguardFiles 'consumer-proguard.txt'
     }
     debug {
-      minifyEnabled false
+      minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-      consumerProguardFiles 'consumer-proguard.txt'
     }
   }
 

@@ -10,44 +10,43 @@
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
-
-# Prevent R8 from leaving Data object members always null
 -keepclassmembers,allowobfuscation class * {
-@com.google.gson.annotations.SerializedName <fields>;
+  @com.google.gson.annotations.SerializedName <fields>;
 }
-
-# OkHttp
--dontwarn javax.annotation.**
--dontwarn okhttp3.internal.platform.ConscryptPlatform
 
 # Proguard config for Retrofit
 -keepattributes Exceptions, Signature, InnerClasses, LineNumberTable, SourceFile, EnclosingMethod, *Annotation*
+#-keepattributes Signature, InnerClasses, EnclosingMethod
 -keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
-@retrofit2.http.* <methods>;
+    @retrofit2.http.* <methods>;
 }
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
--dontwarn javax.annotation.**
+
 -dontwarn kotlin.Unit
 -dontwarn retrofit2.KotlinExtensions
--dontwarn retrofit2.KotlinExtensions.*
+-dontwarn retrofit2.KotlinExtensions*
 
 -if interface * { @retrofit2.http.* <methods>; }
 -keep,allowobfuscation interface <1>
 
--dontwarn kotlinx.**
+# Proguard config for Okhttp
+-dontwarn javax.annotation.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
+-dontwarn org.conscrypt.ConscryptHostnameVerifier
 
 # Proguard config for Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep class * extends com.bumptech.glide.module.AppGlideModule {
-<init>(...);
+  <init>(...);
 }
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
-**[] $VALUES;
-public *;
+  **[] $VALUES;
+  public *;
 }
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
-*** rewind();
+  *** rewind();
 }
 
 # Proguard config for Koin
@@ -67,22 +66,16 @@ public *;
 -dontwarn com.github.ybq.**
 -keep class com.github.ybq.** { *; }
 
-# Proguard config Material Design
+# Proguard config Kotlin
 -dontwarn org.jetbrains.kotlinx.**
+-keep class kotlin.jvm.** { *; }
 
 # Proguard config for Coroutines
 -dontwarn kotlin.coroutines.**
 -dontwarn kotlinx.coroutines.**
 
-# Proguard config for Paging
--dontwarn androidx.paging.**
-
 # Proguard config for Parcelable
 -keep class **$$Parcelable { *; }
 
--keep class com.syntia.moviecatalogue.base.data.remote.* { <fields>; }
--keep class com.syntia.moviecatalogue.base.data.repository.* { <fields>; }
--keep class com.syntia.moviecatalogue.base.domain.model.* { <fields>; }
--keep class com.syntia.moviecatalogue.core.data.source.local.entity.* { <fields>; }
--keep class com.syntia.moviecatalogue.core.data.source.remote.response.* { <fields>; }
--keep class com.syntia.moviecatalogue.core.domain.model.* { <fields>; }
+-keep class com.syntia.moviecatalogue.base.data.remote.response.* { *; }
+-keep class com.syntia.moviecatalogue.core.data.source.remote.response.* { *; }
