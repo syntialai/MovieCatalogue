@@ -49,59 +49,6 @@ class FavoriteItemRepositoryImplTest : BaseTest() {
   }
 
   @Test
-  fun `Given when getFavoriteMovies then return flow pf paging data`() {
-    val movie = listOf(MovieEntity(
-        id = ID,
-        title = TITLE,
-        image = IMAGE,
-        releasedYear = YEAR,
-        voteAverage = VOTE_AVERAGE_STRING,
-        adult = false
-    ))
-
-    dispatcher.runBlockingTest {
-//      whenever(
-//          favoriteMoviesLocalDataSource.getAllFavoriteMovies(any(), any())) doReturn movie
-//
-//      val flow = favoriteItemRepository.getFavoriteMovies()
-//
-//      flow.collectLatest {
-//        verify(favoriteMoviesLocalDataSource).getAllFavoriteMovies(pageCaptor.capture(),
-//            pageSizeCaptor.capture())
-//        assertEquals(PAGE_ZERO, pageCaptor.firstValue)
-//        assertEquals(PAGE_SIZE, pageSizeCaptor.firstValue)
-//
-//        verifyNoMoreInteractions(favoriteMoviesLocalDataSource)
-      }
-  }
-
-  @Test
-  fun `Given when getFavoriteTvShows then return flow pf paging data`() {
-    val tvShows = listOf(TvShowsEntity(
-        id = ID,
-        title = TITLE,
-        image = IMAGE,
-        releasedYear = YEAR,
-        voteAverage = VOTE_AVERAGE_STRING
-    ))
-
-    dispatcher.runBlockingTest {
-//      whenever(favoriteTvShowsLocalDataSource.getAllFavoriteTvShows(any(), any())) doReturn tvShows
-//
-//      val flow = favoriteItemRepository.getFavoriteTvShows()
-//
-//      flow.collectLatest {
-//        verify(favoriteTvShowsLocalDataSource).getAllFavoriteTvShows(pageCaptor.capture(),
-//            pageSizeCaptor.capture())
-//        assertEquals(PAGE_ZERO, pageCaptor.firstValue)
-//        assertEquals(PAGE_SIZE, pageSizeCaptor.firstValue)
-//
-//        verifyNoMoreInteractions(favoriteTvShowsLocalDataSource)
-//      }
-    }
-  }
-
-  @Test
   fun `Given when getIsMovieExist then return flow of boolean from data source`() {
     val expected = true
 

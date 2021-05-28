@@ -1,6 +1,5 @@
 package com.syntia.moviecatalogue.base.utils
 
-import com.syntia.moviecatalogue.base.data.remote.response.base.ListItemResponse
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -11,12 +10,6 @@ object DataMapper {
 
   private const val YEAR_START_INDEX = 0
   private const val YEAR_END_INDEX = 4
-
-  fun <T, U> toUiModels(responses: ListItemResponse<T>, toUiModel: (T) -> U): List<U> {
-    return responses.results.map {
-      toUiModel.invoke(it)
-    }
-  }
 
   fun getTitle(title: String?, name: String?) = title ?: name.orEmpty()
 

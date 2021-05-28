@@ -1,14 +1,15 @@
 package com.syntia.moviecatalogue.core.data.repository
 
 import com.syntia.moviecatalogue.base.data.remote.response.ResponseWrapper
-import com.syntia.moviecatalogue.base.data.repository.BaseRepository
-import com.syntia.moviecatalogue.base.data.source.network.NetworkBoundResource
+import com.syntia.moviecatalogue.base.data.repository.RemoteMapResult
+import com.syntia.moviecatalogue.base.data.source.network.NetworkAndDataFetch
 import com.syntia.moviecatalogue.base.domain.model.result.ResultWrapper
 import com.syntia.moviecatalogue.core.config.api.ApiPath
 import com.syntia.moviecatalogue.core.data.source.local.datasource.FavoriteMoviesLocalDataSource
 import com.syntia.moviecatalogue.core.data.source.local.datasource.FavoriteTvShowsLocalDataSource
 import com.syntia.moviecatalogue.core.data.source.remote.datasource.DetailRemoteDataSource
 import com.syntia.moviecatalogue.core.data.source.remote.response.detail.Detail
+import com.syntia.moviecatalogue.core.data.source.remote.response.detail.MediaCredits
 import com.syntia.moviecatalogue.core.domain.model.detail.CastUiModel
 import com.syntia.moviecatalogue.core.domain.model.detail.DetailUiModel
 import com.syntia.moviecatalogue.core.domain.repository.DetailRepository
@@ -20,10 +21,10 @@ import kotlinx.coroutines.flow.flowOn
 class DetailRepositoryImpl(private val detailRemoteDataSource: DetailRemoteDataSource,
     private val favoriteMoviesLocalDataSource: FavoriteMoviesLocalDataSource,
     private val favoriteTvShowsLocalDataSource: FavoriteTvShowsLocalDataSource,
-    override val ioDispatcher: CoroutineDispatcher) : DetailRepository, BaseRepository() {
+    private val ioDispatcher: CoroutineDispatcher) : DetailRepository {
 
   override suspend fun getDetails(mediaType: String, id: Int): Flow<ResultWrapper<DetailUiModel>> {
-    return object : NetworkBoundResource<Detail, DetailUiModel>() {
+    return object : NetworkAndDataFetch<Detail, DetailUiModel>() {
 
       override suspend fun fetchData(): Flow<ResponseWrapper<Detail>> {
         return getDetailMethod(mediaType, id, detailRemoteDataSource::getMovieDetails,
@@ -46,10 +47,16 @@ class DetailRepositoryImpl(private val detailRemoteDataSource: DetailRemoteDataS
 
   override suspend fun getDetailCasts(mediaType: String,
       id: Int): Flow<ResultWrapper<MutableList<CastUiModel>>> {
-    return fetchRemote(suspend {
-      getDetailMethod(mediaType, id, detailRemoteDataSource::getMovieCredits,
-          detailRemoteDataSource::getTvCredits)
-    }, DetailMapper::toCastUiModels)
+    return object : RemoteMapResult<MediaCredits, MutableList<CastUiModel>>() {
+      override suspend fun fetchData(): Flow<ResponseWrapper<MediaCredits>> {
+        return getDetailMethod(mediaType, id, detailRemoteDataSource::getMovieCredits,
+            detailRemoteDataSource::getTvCredits)
+      }
+
+      override suspend fun mapData(data: MediaCredits): MutableList<CastUiModel> {
+        return DetailMapper.toCastUiModels(data)
+      }
+    }.getResult(ioDispatcher)
   }
 
   private suspend fun <T> getDetailMethod(mediaType: String, id: Int,

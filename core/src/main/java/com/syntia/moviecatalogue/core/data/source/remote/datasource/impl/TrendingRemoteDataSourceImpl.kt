@@ -2,7 +2,7 @@ package com.syntia.moviecatalogue.core.data.source.remote.datasource.impl
 
 import com.syntia.moviecatalogue.base.data.remote.response.ResponseWrapper
 import com.syntia.moviecatalogue.base.data.remote.response.base.ListItemResponse
-import com.syntia.moviecatalogue.base.data.source.datasource.BaseRemoteDataSource
+import com.syntia.moviecatalogue.base.data.source.datasource.RemoteWrapResponse
 import com.syntia.moviecatalogue.core.data.source.remote.datasource.TrendingRemoteDataSource
 import com.syntia.moviecatalogue.core.data.source.remote.response.movie.Movie
 import com.syntia.moviecatalogue.core.data.source.remote.response.trending.TrendingItem
@@ -12,10 +12,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 
 class TrendingRemoteDataSourceImpl(private val trendingService: TrendingService,
-    override val ioDispatcher: CoroutineDispatcher) : TrendingRemoteDataSource, BaseRemoteDataSource() {
+    private val ioDispatcher: CoroutineDispatcher) : TrendingRemoteDataSource {
 
   override suspend fun getTrendingItems(): Flow<ResponseWrapper<ListItemResponse<TrendingItem>>> {
-    return createFlow(trendingService::getTrendingItems)
+    return object : RemoteWrapResponse<ListItemResponse<TrendingItem>>() {
+      override suspend fun fetchData(): ListItemResponse<TrendingItem> {
+        return trendingService.getTrendingItems()
+      }
+    }.getResult(ioDispatcher)
   }
 
   override suspend fun getPopularMovies(page: Int): ListItemResponse<Movie> {

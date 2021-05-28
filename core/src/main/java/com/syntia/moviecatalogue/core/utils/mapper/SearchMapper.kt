@@ -8,8 +8,9 @@ import com.syntia.moviecatalogue.core.domain.model.search.SearchResultUiModel
 
 object SearchMapper {
 
-  fun toSearchResultUiModels(responses: ListItemResponse<SearchResult>) = DataMapper.toUiModels(
-      responses, SearchMapper::toSearchResultUiModel)
+  fun toSearchResultUiModels(responses: ListItemResponse<SearchResult>) = responses.results.map {
+    toSearchResultUiModel(it)
+  }
 
   private fun toSearchResultUiModel(response: SearchResult) = SearchResultUiModel(
       id = response.id,

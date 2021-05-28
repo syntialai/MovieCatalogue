@@ -27,7 +27,7 @@ class SearchRemoteDataSourceImplTest : BaseTest() {
 
   override fun setUp() {
     super.setUp()
-    searchRemoteDataSource = SearchRemoteDataSourceImpl(searchService, dispatcher)
+    searchRemoteDataSource = SearchRemoteDataSourceImpl(searchService)
   }
 
   @Test

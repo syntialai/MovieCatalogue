@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.single
 
-abstract class NetworkBoundResource<Response, Result> {
+abstract class NetworkAndDataFetch<Response, Result> {
 
   private var result: Flow<ResultWrapper<Result>> = flow {
     emit(ResultWrapper.Loading)
