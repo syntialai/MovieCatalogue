@@ -77,7 +77,7 @@ class DetailRepositoryImplTest : BaseTest() {
 
       val flow = detailRepository.getDetailCasts(MEDIA_TYPE_TV, ID)
 
-      flow.collectLatest { actual ->
+      flow.collectLatest {
         verify(detailRemoteDataSource).getTvCredits(ID)
         verifyNoMoreInteractions(detailRemoteDataSource)
       }
