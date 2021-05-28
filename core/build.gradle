@@ -50,6 +50,10 @@ android {
     unitTests {
       includeAndroidResources = true
       returnDefaultValues = true
+
+      all {
+        maxHeapSize = "1024m"
+      }
     }
   }
 }

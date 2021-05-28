@@ -26,7 +26,7 @@ jobs:
             - ~/.android/cache
       - run:
           name: Run Build
-          command: ./gradlew build --no-daemon
+          command: ./gradlew build
       - store_artifacts: 
           path: app/build/reports
           destination: reports
