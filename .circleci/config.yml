@@ -32,7 +32,7 @@ jobs:
           destination: reports
       - run:
           name: Run Tests
-          command: ./gradlew lint testDebug
+          command: ./gradlew lint test
       - store_test_results:
           path: app/build/test-results
       - store_artifacts:  
