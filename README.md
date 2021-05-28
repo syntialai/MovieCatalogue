@@ -10,4 +10,5 @@ This repository includes:
 + Retrofit 2
 + Coroutine-Flow
 + Paging 3
++ Modularization (Library and Dynamic Feature)
 + Unit tests
